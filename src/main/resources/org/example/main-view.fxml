@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<TabPane tabClosingPolicy="UNAVAILABLE"
+         xmlns:fx="http://javafx.com/fxml"
+         fx:controller="org.example.MainController">
+
+    <Tab text="Accueil">
+        <VBox spacing="20" alignment="CENTER" style="-fx-padding: 30;">
+            <ImageView fitWidth="200" fitHeight="100" preserveRatio="true">
+                <image>
+                    <Image url="@image/logo-mv-cegep.png"/>
+                </image>
+            </ImageView>
+            <Label text="Collège de Maisonneuve"
+                   style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+            <Label text="Département d'informatique"
+                   style="-fx-font-size: 16;"/>
+            <Label text="Bienvenue dans le système scolaire"
+                   style="-fx-font-size: 14; -fx-text-fill: gray;"/>
+            <Label fx:id="labelDate" style="-fx-font-size: 14; -fx-text-fill: gray;"/>
+        </VBox>
+    </Tab>
+
+    <Tab text="Cours">
+        <VBox spacing="10" style="-fx-padding: 15;">
+            <Label text="Liste des cours" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Button text="Ajouter" onAction="#handleAjouterCours"/>
+            <TableView fx:id="tableCours">
+                <columns>
+                    <TableColumn fx:id="colCoursNom" text="Nom" prefWidth="150"/>
+                    <TableColumn fx:id="colCoursCode" text="Code" prefWidth="100"/>
+                    <TableColumn fx:id="colCoursDescription" text="Description" prefWidth="200"/>
+                    <TableColumn fx:id="colCoursProf" text="Professeur" prefWidth="150"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </Tab>
+
+    <Tab text="Professeurs">
+        <VBox spacing="10" style="-fx-padding: 15;">
+            <Label text="Liste des professeurs" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Button text="Ajouter" onAction="#handleAjouterProf"/>
+            <TableView fx:id="tableProfs">
+                <columns>
+                    <TableColumn fx:id="colProfNom" text="Nom" prefWidth="150"/>
+                    <TableColumn fx:id="colProfPrenom" text="Prénom" prefWidth="150"/>
+                    <TableColumn fx:id="colProfId" text="Identifiant" prefWidth="100"/>
+                    <TableColumn fx:id="colProfSalaire" text="Salaire" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </Tab>
+
+    <Tab text="Étudiants">
+        <VBox spacing="10" style="-fx-padding: 15;">
+            <Label text="Liste des étudiants" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Button text="Ajouter" onAction="#handleAjouterEtudiant"/>
+            <TableView fx:id="tableEtudiants">
+                <columns>
+                    <TableColumn fx:id="colEtudiantNom" text="Nom" prefWidth="150"/>
+                    <TableColumn fx:id="colEtudiantPrenom" text="Prénom" prefWidth="150"/>
+                    <TableColumn fx:id="colEtudiantId" text="Identifiant" prefWidth="100"/>
+                    <TableColumn fx:id="colEtudiantCoteR" text="Cote R" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </Tab>
+
+    <Tab text="À propos">
+        <VBox spacing="10" style="-fx-padding: 15;">
+            <Label text="Page créative" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+        </VBox>
+    </Tab>
+
+</TabPane>
