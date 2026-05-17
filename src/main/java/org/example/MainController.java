@@ -117,5 +117,50 @@ public class MainController {
         }
     }
 
+    @FXML
+    private void handleAjouterProf() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/ajout-prof-view.fxml"));
+            Stage popup = new Stage();
+            popup.setTitle("Ajouter un professeur");
+            popup.setScene(new Scene(loader.load(), 400, 300));
+            popup.initModality(Modality.WINDOW_MODAL);
+            popup.initOwner(tableProfs.getScene().getWindow());
+            popup.showAndWait();
 
+            AjoutProfController ctrl = loader.getController();
+            Professeur nouveau = ctrl.getProfesseurCree();
+            if (nouveau != null) {
+                listeProfs.add(nouveau);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleAjouterEtudiant() {
+        // À compléter
+    }
+
+    @FXML
+    private void handleAjouterCours() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/ajout-cours-view.fxml"));
+            Stage popup = new Stage();
+            popup.setTitle("Ajouter un cours");
+            popup.setScene(new Scene(loader.load(), 450, 350));
+            popup.initModality(Modality.WINDOW_MODAL);
+            popup.initOwner(tableCours.getScene().getWindow());
+            popup.showAndWait();
+
+            AjoutCoursController ctrl = loader.getController();
+            Cours nouveau = ctrl.getCoursCree();
+            if (nouveau != null) {
+                listeCours.add(nouveau);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
