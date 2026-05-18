@@ -25,6 +25,14 @@ public class MainController {
 
     // date pour accueil
     @FXML private Label labelDate;
+    @FXML private TabPane tabPane;
+    @FXML private Tab tabCours;
+    @FXML private Tab tabProfs;
+    @FXML private Tab tabEtudiants;
+    @FXML private Tab tabAPropos;
+    @FXML private Label labelNbCours;
+    @FXML private Label labelNbProfs;
+    @FXML private Label labelNbEtudiants;
 
     // Table des professeurs
     @FXML private TableView<Professeur> tableProfs;
@@ -81,6 +89,43 @@ public class MainController {
         chargerProfs();
         chargerCours();
         chargerEtudiants();
+        mettreAJourStatistiques();
+
+        tabPane.getSelectionModel().selectedItemProperty().addListener((observable, ancienOnglet, nouvelOnglet) -> {
+            if (nouvelOnglet == tabCours) {
+                rechargerCours();
+            } else if (nouvelOnglet == tabProfs) {
+                rechargerProfs();
+            } else if (nouvelOnglet == tabEtudiants) {
+                rechargerEtudiants();
+            } else if (nouvelOnglet == tabAPropos) {
+                mettreAJourStatistiques();
+            }
+        });
+    }
+
+    private void rechargerProfs() {
+        listeProfs.clear();
+        chargerProfs();
+        mettreAJourStatistiques();
+    }
+
+    private void rechargerCours() {
+        listeCours.clear();
+        chargerCours();
+        mettreAJourStatistiques();
+    }
+
+    private void rechargerEtudiants() {
+        listeEtudiants.clear();
+        chargerEtudiants();
+        mettreAJourStatistiques();
+    }
+
+    private void mettreAJourStatistiques() {
+        labelNbCours.setText(String.valueOf(listeCours.size()));
+        labelNbProfs.setText(String.valueOf(listeProfs.size()));
+        labelNbEtudiants.setText(String.valueOf(listeEtudiants.size()));
     }
 
     private void chargerProfs() {
@@ -146,6 +191,7 @@ public class MainController {
             Professeur nouveau = ctrl.getProfesseurCree();
             if (nouveau != null) {
                 listeProfs.add(nouveau);
+                mettreAJourStatistiques();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -167,6 +213,7 @@ public class MainController {
             Etudiant nouveau = ctrl.getEtudiantCree();
             if (nouveau != null) {
                 listeEtudiants.add(nouveau);
+                mettreAJourStatistiques();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -188,6 +235,7 @@ public class MainController {
             Cours nouveau = ctrl.getCoursCree();
             if (nouveau != null) {
                 listeCours.add(nouveau);
+                mettreAJourStatistiques();
             }
         } catch (IOException e) {
             e.printStackTrace();
