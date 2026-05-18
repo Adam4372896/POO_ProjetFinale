@@ -15,11 +15,12 @@
                     <Image url="@image/logo-mv-cegep.png"/>
                 </image>
             </ImageView>
-            <Label text="Collège de Maisonneuve"
+            <Label text="CÉGEP MARIE-VICTORIN"
                    style="-fx-font-size: 24; -fx-font-weight: bold;"/>
             <Label text="Département d'informatique"
                    style="-fx-font-size: 16;"/>
-            <Label text="Bienvenue dans le système scolaire"
+            <Label text="Bienvenue dans le système scolaire du Cégep Marie-Victorin. Cette application permet de gérer les cours, les professeurs et les étudiants du département d'informatique."
+                   wrapText="true" maxWidth="600" textAlignment="CENTER"
                    style="-fx-font-size: 14; -fx-text-fill: gray;"/>
             <Label fx:id="labelDate" style="-fx-font-size: 14; -fx-text-fill: gray;"/>
         </VBox>

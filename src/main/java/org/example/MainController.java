@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import org.example.model.Cours;
 import org.example.model.Etudiant;
 import org.example.model.Professeur;
@@ -21,8 +20,6 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.List;
-
-import org.example.model.Cours;
 
 public class MainController {
 
@@ -83,6 +80,7 @@ public class MainController {
         // Charger depuis le fichier xxx.json
         chargerProfs();
         chargerCours();
+        chargerEtudiants();
     }
 
     private void chargerProfs() {
@@ -117,6 +115,22 @@ public class MainController {
         }
     }
 
+    private void chargerEtudiants() {
+        Gson gson = new Gson();
+        File fichier = new File("etudiants.json");
+        if (fichier.exists()) {
+            try (Reader reader = new FileReader(fichier)) {
+                Type type = new TypeToken<List<Etudiant>>(){}.getType();
+                List<Etudiant> liste = gson.fromJson(reader, type);
+                if (liste != null) {
+                    listeEtudiants.addAll(liste);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @FXML
     private void handleAjouterProf() {
         try {
@@ -140,7 +154,23 @@ public class MainController {
 
     @FXML
     private void handleAjouterEtudiant() {
-        // À compléter
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/ajout-etudiant-view.fxml"));
+            Stage popup = new Stage();
+            popup.setTitle("Ajouter un étudiant");
+            popup.setScene(new Scene(loader.load(), 400, 300));
+            popup.initModality(Modality.WINDOW_MODAL);
+            popup.initOwner(tableEtudiants.getScene().getWindow());
+            popup.showAndWait();
+
+            AjoutEtudiantController ctrl = loader.getController();
+            Etudiant nouveau = ctrl.getEtudiantCree();
+            if (nouveau != null) {
+                listeEtudiants.add(nouveau);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
